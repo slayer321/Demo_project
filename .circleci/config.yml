@@ -54,6 +54,9 @@ jobs:
             echo "Printing pre-commit version"
             pre-commit -V
             
+            echo "Working pre-commit"
+            base_ref="$(git merge-base main $CIRCLE_SHA1)"
+            pre-commit run --from-ref "${base_ref}" --to-ref "$CIRCLE_SHA1"
             #python3 -m pip install pre-commit
             # sudo apt-get install sqlite3  
             # sqlite3 -version  

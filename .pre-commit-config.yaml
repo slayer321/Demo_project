@@ -6,6 +6,6 @@ repos:
     hooks:
       - id: check-json
   - repo: https://github.com/fluxninja/pre-commit-hooks.git
-    rev: v0.0.2-rc.1
+    rev: v0.0.2-rc.3
     hooks:
       - id: circleci-validate
