@@ -35,9 +35,7 @@ jobs:
             wget https://www.python.org/ftp/python/3.9.13/Python-3.9.13.tgz
             tar -xf Python-3.9.13.tgz
             cd Python-3.9.13
-            ./configure
-            sudo make altinstall
-            sudo make install
+            ./configure --enable-loadable-sqlite-extensions && make && sudo make install
             python3 --version
       - run:
           name: Install pre-commit hooks
