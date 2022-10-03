@@ -14,7 +14,8 @@ executors:
 jobs:
 
   pre-commit:
-    machine: true
+    docker:
+      - image: cimg/node:17.2.0 
     #resource_class: xlarge
     steps:
       - run:
