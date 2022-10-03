@@ -2,7 +2,9 @@ version: 2.1
 
 setup: true
 
-
+orbs:
+  docker: circleci/docker@2.1.1
+  
 executors:
   base-cimg-executor:
     docker:
