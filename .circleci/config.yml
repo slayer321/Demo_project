@@ -26,11 +26,23 @@ jobs:
               libgbm1 \
               libasound2
       - run:
+          name: Install Python
+          command: | 
+            sudo apt install build-essential zlib1g-dev \
+            libncurses5-dev libgdbm-dev libnss3-dev \
+            libssl-dev libreadline-dev libffi-dev curl
+            wget https://www.python.org/ftp/python/3.9.13/Python-3.9.13.tgz
+            tar -xf Python-3.9.13.tgz
+            cd Python-3.9.13
+            ./configure
+            sudo make altinstall
+            sudo make install
+            python3 --version
+      - run:
           name: Install pre-commit hooks
           command: |
-            /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-            brew install pre-commit
-            pre-commit install-hooks
+            pip install pre-commit
+
       - run:
           name: Run pre-commit
           # It'd be faster to run it only on files changed between current branch and target PR branch
