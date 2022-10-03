@@ -46,6 +46,8 @@ jobs:
             # cd Python-3.9.13
             # ./configure --enable-loadable-sqlite-extensions && make && sudo make install
             # python3 --version
+            echo "get ENV"
+            echo $CIRCLECI
       - run:
           name: Install pre-commit hooks
           command: |
