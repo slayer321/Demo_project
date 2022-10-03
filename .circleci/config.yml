@@ -61,6 +61,7 @@ jobs:
           command: |
             set -euo pipefail
             set -x
+            pre-commit --version
             if [ "$CIRCLE_BRANCH" = "main" ]; then
               pre-commit run --all-files
             else
