@@ -48,5 +48,5 @@ workflows:
   version: 2
 
   pre-commit:
-  jobs:
-    - pre-commit
+    jobs:
+      - pre-commit
