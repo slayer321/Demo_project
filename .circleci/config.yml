@@ -59,8 +59,8 @@ jobs:
           # 1) If current branch is main - pre-commit checks all files
           # 2) Otherwise - we find common ancestor between current commit and main and run pre-commit with a base (from-ref) set to that ancestor
           command: |
-            set -euo pipefail
-            set -x
+            # set -euo pipefail
+            # set -x
             pre-commit --version
             if [ "$CIRCLE_BRANCH" = "main" ]; then
               pre-commit run --all-files
