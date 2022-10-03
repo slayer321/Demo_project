@@ -49,7 +49,6 @@ jobs:
             sudo apt-get install python-pysqlite2-dbg  
             sudo apt-get install libsqlite3-dev   
             sudo apt-get install sqlite  
-            sudo python3 -m pip install pysqlite 
 
       - run:
           name: Run pre-commit
