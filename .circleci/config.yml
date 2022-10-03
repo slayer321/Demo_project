@@ -9,6 +9,7 @@ jobs:
     executor: python-cimg-executor
     resource_class: xlarge
     steps:
+      - checkout
       - run:
           name: Install additional system dependencies for pre-commit
           command: |
