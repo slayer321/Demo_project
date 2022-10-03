@@ -48,7 +48,7 @@ jobs:
             . $HOME/.asdf/asdf.sh >> .bashrc
             . $HOME/.asdf/completions/asdf.bash >> .bashrc
             asdf plugin add pre-commit
-            asdf plugin add https://github.com/comdotlinux/asdf-pre-commit.git
+            
             
             #python3 -m pip install pre-commit
             # sudo apt-get install sqlite3  
