@@ -6,12 +6,12 @@ executors:
 
 jobs:
   hello-job:
-  executor: python-cimg-executor
-  resource_class: xlarge
-  steps:
-    - checkout # check out the code in the project directory
-    - run: echo "hello world" # run the `echo` command
-    
+    executor: python-cimg-executor
+    resource_class: xlarge
+    steps:
+      - checkout # check out the code in the project directory
+      - run: echo "hello world" # run the `echo` command
+
   pre-commit:
     executor: python-cimg-executor
     resource_class: xlarge
