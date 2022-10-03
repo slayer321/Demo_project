@@ -7,6 +7,7 @@ executors:
 jobs:
   pre-commit:
     executor: python-cimg-executor
+    resource_class: xlarge
     steps:
       - run:
           name: Install additional system dependencies for pre-commit
