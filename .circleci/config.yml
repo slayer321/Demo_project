@@ -47,8 +47,11 @@ jobs:
             git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.10.2
             . $HOME/.asdf/asdf.sh >> .bashrc
             . $HOME/.asdf/completions/asdf.bash >> .bashrc
-            asdf plugin-add pre-commit git@github.com:jonathanmorley/asdf-pre-commit.git
+            asdf plugin add pre-commit
+            asdf list-all pre-commit
+            asdf install pre-commit latest
             pre-commit -V
+
             #python3 -m pip install pre-commit
             # sudo apt-get install sqlite3  
             # sqlite3 -version  
