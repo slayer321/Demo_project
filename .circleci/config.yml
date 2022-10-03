@@ -51,6 +51,7 @@ jobs:
             asdf list-all pre-commit
             asdf install pre-commit latest
             echo "pre-commit 2.20.0" >> .tool-versions
+            echo "Printing pre-commit version"
             pre-commit -V
             
             #python3 -m pip install pre-commit
