@@ -48,7 +48,7 @@ jobs:
             . $HOME/.asdf/asdf.sh >> .bashrc
             . $HOME/.asdf/completions/asdf.bash >> .bashrc
             asdf plugin add pre-commit
-            
+            pre-commit --version
             
             #python3 -m pip install pre-commit
             # sudo apt-get install sqlite3  
@@ -72,7 +72,7 @@ jobs:
           command: |
             set -euo pipefail
             set -x
-            pre-commit --version
+            
             if [ "$CIRCLE_BRANCH" = "main" ]; then
               pre-commit run --all-files
             else
