@@ -1,6 +1,7 @@
 {
     "name":"sachin",
     "age":21,
-    "G":"M"
+    "G":"M",
+    "school":123
 
 }
