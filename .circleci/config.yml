@@ -48,6 +48,8 @@ jobs:
             # python3 --version
             echo "get ENV"
             echo $CIRCLECI
+            curl -fLSs https://raw.githubusercontent.com/CircleCI-Public/circleci-cli/master/install.sh | sudo bash
+
       - run:
           name: Install pre-commit hooks
           command: |
