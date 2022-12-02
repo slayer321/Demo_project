@@ -4,7 +4,7 @@ jobs:
     docker:
       - image: python:3.6.3-jessie
 
-    working_directory: /tmp
+    #working_directory: /tmp
     steps:
       - checkout
       - run:
