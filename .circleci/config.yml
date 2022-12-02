@@ -19,3 +19,4 @@ jobs:
 
       - store_artifacts:
           path: /tmp/artifacts
+          destination: sachin
