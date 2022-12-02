@@ -17,7 +17,7 @@ jobs:
 
       - run:
           name: Running python script
-          working_directory: /tmp
+          #working_directory: /tmp
           command: | 
             echo "Running python make file"
             ls -al
