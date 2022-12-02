@@ -1,106 +1,21 @@
 version: 2.1
-
-setup: true
-
-orbs:
-  docker: circleci/docker@2.1.1
-
-executors:
-  base-cimg-executor:
-    docker:
-      - image: cimg/base:2021.07
-  base-cimg-executor-sachin:
-    docker:
-      - image: cimg/base:2021.07
-
-
-
 jobs:
-
-  pre-commit:
+  build:
     docker:
-      - image: cimg/node:17.2.0 
-    #resource_class: xlarge
+      - image: python:3.6.3-jessie
+
+    working_directory: /tmp
     steps:
-      - checkout
       - run:
-          name: Install additional system dependencies for pre-commit
+          name: Creating Dummy Artifacts
           command: |
-            sudo apt-get update
-            sudo apt-get install \
-              libgtk-3-0 \
-              libgbm1 \
-              libasound2
-      - run:
-          name: Install Python
-          command: | 
-            
+            echo "my artifact file" > /tmp/artifact-1;
+            mkdir /tmp/artifacts;
+            echo "my artifact files in a dir" > /tmp/artifacts/artifact-2;
 
+      - store_artifacts:
+          path: /tmp/artifact-1
+          destination: artifact-file
 
-
-            # sudo apt install build-essential zlib1g-dev \
-            # libncurses5-dev libgdbm-dev libnss3-dev \
-            # libssl-dev libreadline-dev libffi-dev curl
-            # wget https://www.python.org/ftp/python/3.9.13/Python-3.9.13.tgz
-            # tar -xf Python-3.9.13.tgz
-            # cd Python-3.9.13
-            # ./configure --enable-loadable-sqlite-extensions && make && sudo make install
-            # python3 --version
-            echo "get ENV"
-            echo $CIRCLECI
-            curl -fLSs https://raw.githubusercontent.com/CircleCI-Public/circleci-cli/master/install.sh | sudo bash
-
-      - run:
-          name: Install pre-commit hooks
-          command: |
-            git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.10.2
-            . $HOME/.asdf/asdf.sh >> .bashrc
-            . $HOME/.asdf/completions/asdf.bash >> .bashrc
-            asdf plugin add pre-commit
-            asdf list-all pre-commit
-            asdf install pre-commit latest
-            echo "pre-commit 2.20.0" >> .tool-versions
-            echo "Printing pre-commit version"
-            pre-commit -V
-            pre-commit install
-            sudo apt install python3.9-distutils
-            echo "where is precommit"
-            which pre-commit
-            echo "Working pre-commit"
-            pre-commit run --all-files
-            #python3 -m pip install pre-commit
-            # sudo apt-get install sqlite3  
-            # sqlite3 -version  
-            # sudo apt-get install python-pysqlite2  
-            # sudo apt-get install python-pysqlite2-dbg  
-            # sudo apt-get install libsqlite3-dev   
-            # sudo apt-get install sqlite  
-            #python3 -m pip install db-sqlite3
-
-      # - run:
-      #     name: Run pre-commit
-      #     # It'd be faster to run it only on files changed between current branch and target PR branch
-      #     # This can be done with: pre-commit run --from-ref <TARGET_BRANCH> --to-ref HEAD
-      #     # Unfortunately, CircleCI doesn't expose target branch
-      #     # Possible option is to use narrativescience/ghpr orb with get-pr-info, but this step can't be disabled
-      #     # So then we'd only be able to run this job on PRs, and would require separate job for running on main
-      #     # We use alternative approach, in which:
-      #     # 1) If current branch is main - pre-commit checks all files
-      #     # 2) Otherwise - we find common ancestor between current commit and main and run pre-commit with a base (from-ref) set to that ancestor
-      #     command: |
-      #       set -euo pipefail
-      #       set -x
-            
-      #       if [ "$CIRCLE_BRANCH" = "main" ]; then
-      #         pre-commit run --all-files
-      #       else
-      #         base_ref="$(git merge-base main $CIRCLE_SHA1)"
-      #         pre-commit run --from-ref "${base_ref}" --to-ref "$CIRCLE_SHA1"
-      #       fi
-
-
-
-workflows:
-  pre-commit:
-    jobs:
-      - pre-commit
+      - store_artifacts:
+          path: /tmp/artifacts
