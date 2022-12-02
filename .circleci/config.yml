@@ -20,6 +20,7 @@ jobs:
           working_directory: /tmp
           command: | 
             echo "Running python make file"
+            ls -al
             make run-python-code > /tmp/artifacts/python-test
 
       - store_artifacts:
