@@ -6,6 +6,7 @@ jobs:
 
     working_directory: /tmp
     steps:
+      - checkout
       - run:
           name: Creating Dummy Artifacts
           command: |
@@ -17,7 +18,7 @@ jobs:
           name: Running python script
           command: | 
             echo "Running python make file"
-            make > /tmp/artifacts/python-test
+            make run-python-code > /tmp/artifacts/python-test
 
       - store_artifacts:
           path: /tmp/artifacts
