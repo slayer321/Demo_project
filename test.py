@@ -3,7 +3,7 @@ import sys
 
 
 def work():
-    for i in range(1,100):
+    for i in range(1,10):
         logger.add(sys.stderr,level="TRACE")
         logger.info("taking info logs")
         logger.trace(f"taking trace logs {test()}")
