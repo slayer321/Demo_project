@@ -1,10 +1,10 @@
-import logging
+from loguru import logger
 
 
 def work():
     for i in range(1,100):
-        logging.info("taking info logs")
-        logging.warning("taking trace logs")
+        logger.info("taking info logs")
+        logger.trace("taking trace logs")
         print(i)
         
         
