@@ -14,6 +14,7 @@ jobs:
           name: Test base image
           command:
             echo "Hello world"
+            docker version
   # build:
   #   docker:
   #     - image: python:3.6.3-jessie
