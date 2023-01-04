@@ -10,10 +10,11 @@ jobs:
   build:
     executor: base-cimg-executor
     steps:
+      - checkout
       - run:
           name: Test base image
-          command:
-            echo "Hello world"
+          command: |
+            ls -l
             docker version
   # build:
   #   docker:
