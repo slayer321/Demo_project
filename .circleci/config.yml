@@ -17,6 +17,7 @@ jobs:
           command: |
             ls -l
             docker version
+            cat /etc/lsb-release
   # build:
   #   docker:
   #     - image: python:3.6.3-jessie
