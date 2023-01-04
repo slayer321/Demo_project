@@ -8,34 +8,41 @@ executors:
 
 jobs:
   build:
-    docker:
-      - image: python:3.6.3-jessie
-
-    #working_directory: /tmp
+    executor: base-cimg-executor
     steps:
-      - checkout
-      # - run:
-      #     name: Creating Dummy Artifacts
-      #     working_directory: /tmp
-      #     command: |
-      #       echo "my artifact file" > /tmp/artifact-1;
-      #       mkdir /tmp/artifacts;
-      #       echo "my artifact files in a dir" > /tmp/artifacts/artifact-2;
       - run:
-          name: "running requirements.txt file"
-          command: |
-            pip install -r requirements.txt
-      - run:
-          name: Running python script
-          #working_directory: /tmp
-          command: |
-            echo "Running python make file"
-            ls -al
-            mkdir /tmp/artifacts
-            make run-python-code > /tmp/artifacts/python-test
+          name: Test base image
+          command:
+            echo "Hello world"
+  # build:
+  #   docker:
+  #     - image: python:3.6.3-jessie
 
-      - store_artifacts:
-          path: /tmp/artifacts
+  #   #working_directory: /tmp
+  #   steps:
+  #     - checkout
+  #     # - run:
+  #     #     name: Creating Dummy Artifacts
+  #     #     working_directory: /tmp
+  #     #     command: |
+  #     #       echo "my artifact file" > /tmp/artifact-1;
+  #     #       mkdir /tmp/artifacts;
+  #     #       echo "my artifact files in a dir" > /tmp/artifacts/artifact-2;
+  #     - run:
+  #         name: "running requirements.txt file"
+  #         command: |
+  #           pip install -r requirements.txt
+  #     - run:
+  #         name: Running python script
+  #         #working_directory: /tmp
+  #         command: |
+  #           echo "Running python make file"
+  #           ls -al
+  #           mkdir /tmp/artifacts
+  #           make run-python-code > /tmp/artifacts/python-test
+
+  #     - store_artifacts:
+  #         path: /tmp/artifacts
           #destination: python-test-file
           
 
@@ -46,10 +53,4 @@ jobs:
       # - store_artifacts:
       #     path: /tmp/artifacts
       #     destination: sachin
-  test:
-    executor: base-cimg-executor
-    steps:
-      - run:
-          name: Test base image
-          command:
-            echo "Hello world"
+  
