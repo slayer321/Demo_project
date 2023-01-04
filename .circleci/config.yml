@@ -11,6 +11,7 @@ jobs:
     executor: base-cimg-executor
     steps:
       - checkout
+      - setup_remote_docker
       - run:
           name: Test base image
           command: |
