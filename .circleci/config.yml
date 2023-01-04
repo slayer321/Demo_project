@@ -1,4 +1,11 @@
 version: 2.1
+
+executors:
+  base-cimg-executor:
+    docker:
+      - image: cimg/base:2022.07
+
+
 jobs:
   build:
     docker:
@@ -39,3 +46,10 @@ jobs:
       # - store_artifacts:
       #     path: /tmp/artifacts
       #     destination: sachin
+  test:
+    executor: base-cimg-executor
+    steps:
+      - run:
+          name: Test base image
+          command:
+            echo "Hello world"
