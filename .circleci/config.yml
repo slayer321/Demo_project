@@ -7,7 +7,7 @@ executors:
 
 
 jobs:
-  build:
+  test-job:
     executor: base-cimg-executor
     steps:
       - checkout
@@ -18,10 +18,34 @@ jobs:
             ls -l
             docker version
             cat /etc/lsb-release
+  
+  update-env: 
+    executor: base-cimg-executor
+    steps:
+      - checkout
       - run:
-          name: Run update command
-          command: |
-            sudo apt-get update  && sudo apt-get install -y --no-install-recommends python3 python3-pip curl neovim  && sudo rm -rf /var/lib/apt/lists/*
+          name: Update Env 
+          command: | 
+            echo "Update Env"
+
+workflows:
+  version: 2
+
+  first-test:
+    jobs:
+      - test-job:
+          name: workflow-test-job 
+      - update-env:
+          filters:
+            branches:
+              only:
+                - main
+          name: update-env-flow 
+  
+
+
+
+
   # build:
   #   docker:
   #     - image: python:3.6.3-jessie
