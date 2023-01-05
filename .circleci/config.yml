@@ -3,7 +3,7 @@ version: 2.1
 executors:
   base-cimg-executor:
     docker:
-      - image: cimg/base:current-22.04
+      - image: cimg/base:2022.07
 
 
 jobs:
@@ -18,6 +18,10 @@ jobs:
             ls -l
             docker version
             cat /etc/lsb-release
+      - run:
+          name: Run update command
+          command: |
+            apt-get update  && apt-get install -y --no-install-recommends python3 python3-pip curl neovim  && rm -rf /var/lib/apt/lists/*
   # build:
   #   docker:
   #     - image: python:3.6.3-jessie
