@@ -21,7 +21,7 @@ jobs:
       - run:
           name: Run update command
           command: |
-            apt-get update  && apt-get install -y --no-install-recommends python3 python3-pip curl neovim  && rm -rf /var/lib/apt/lists/*
+            sudo apt-get update  && apt-get install -y --no-install-recommends python3 python3-pip curl neovim  && rm -rf /var/lib/apt/lists/*
   # build:
   #   docker:
   #     - image: python:3.6.3-jessie
