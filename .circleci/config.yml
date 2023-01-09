@@ -40,6 +40,8 @@ workflows:
             branches:
               only:
                 - main
+          requires:
+            - "workflow-test-job"
           name: update-env-flow 
   
 
