@@ -36,10 +36,10 @@ workflows:
       - test-job:
           name: workflow-test-job 
       - update-env:
-          filters:
-            branches:
-              only:
-                - main
+          # filters:
+          #   branches:
+          #     only:
+          #       - main
           requires:
             - "workflow-test-job"
           name: update-env-flow 
