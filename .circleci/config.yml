@@ -8,6 +8,26 @@ executors:
       - image: cimg/base:2022.07
 
 
+commands:
+  block_workflow:
+    parameters:
+      wait_for_job_name:
+        type: string
+        description: 
+          "Name of the Job you want to make wait"
+        default: ""
+      only-on-branch:
+        type: string 
+        description:
+          "Name of the branch"
+        default: "main"
+    steps:
+      - queue/block_workflow:
+          requires:
+            - << parameters.wait_for_job_name >>
+          time: '5'
+
+
 jobs:
   test-job:
     executor: base-cimg-executor
@@ -25,11 +45,8 @@ jobs:
     executor: base-cimg-executor
     steps:
       - checkout
-      - queue/block_workflow:
-            requires:
-              - update-env
-            time: '5'
-            only-on-branch: main
+      - block_workflow:
+          requires: "update-env"
       - run:
           name: Update Env
           command: | 
