@@ -57,9 +57,9 @@ workflows:
 
   first-test:
     jobs:
-      - queue/block_workflow:
-          only-on-branch: main
-          time: '1'
+      # - queue/block_workflow:
+      #     only-on-branch: main
+      #     time: '1'
       - update-env:
           name: "Running the update env"
           requires:
