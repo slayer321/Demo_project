@@ -27,22 +27,42 @@ jobs:
           name: Update Env 
           command: | 
             echo "Update Env"
+  
+  block-orb-test:
+    executor: base-cimg-executor
+    steps:
+      - checkout
+      - run:
+          name: block-orb-test
+          command: | 
+            echo "Update block-orb-test"
+            # start time
+            date +"%H:%M:%S"
+
+            # sleep for 5 seconds
+            sleep 120
+
+            # end time
+            date +"%H:%M:%S"
+
 
 workflows:
   version: 2
 
   first-test:
     jobs:
-      - test-job:
-          name: workflow-test-job 
-      - update-env:
-          # filters:
-          #   branches:
-          #     only:
-          #       - main
-          requires:
-            - "workflow-test-job"
-          name: update-env-flow 
+      - block-orb-test:
+          name:  Test for block-orb
+      # - test-job:
+      #     name: workflow-test-job 
+      # - update-env:
+      #     # filters:
+      #     #   branches:
+      #     #     only:
+      #     #       - main
+      #     requires:
+      #       - "workflow-test-job"
+      #     name: update-env-flow 
   
 
 
