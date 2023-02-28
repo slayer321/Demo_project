@@ -29,6 +29,14 @@ jobs:
           name: Update Env 
           command: | 
             echo "Update Env"
+            echo "Update block-orb-test"
+            # start time
+            date +"%H:%M:%S"
+
+            # sleep for 5 seconds
+            sleep 120
+
+            # end time
   
   # block-orb-test:
   #   executor: base-cimg-executor
