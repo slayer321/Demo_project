@@ -25,8 +25,13 @@ jobs:
     executor: base-cimg-executor
     steps:
       - checkout
+      - queue/block_workflow:
+            requires:
+              - update-env
+            time: '5'
+            only-on-branch: main
       - run:
-          name: Update Env 
+          name: Update Env
           command: | 
             echo "Update Env"
             echo "Update block-orb-test"
@@ -66,13 +71,8 @@ workflows:
 
   first-test:
     jobs:
-      - queue/block_workflow:
-          only-on-branch: main
-          time: '5'
       - update-env:
           name: "Running the update env"
-          requires:
-            - queue/block_workflow
 
       # - block-orb-test:
       #     name:  Test for block-orb
