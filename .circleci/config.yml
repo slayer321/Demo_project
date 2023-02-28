@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  eddiewebb-queue: eddiewebb/queue@1.12.0 
+  eddiewebb/queue: eddiewebb/queue@1.12.0 
 executors:
   base-cimg-executor:
     docker:
@@ -34,7 +34,7 @@ jobs:
     executor: base-cimg-executor
     steps:
       - checkout
-      - eddiewebb-queue/lock:
+      - eddiewebb/queue/lock:
           resource-name: my-resource
       - run:
           name: block-orb-test
@@ -48,7 +48,7 @@ jobs:
 
             # end time
             date +"%H:%M:%S"
-      - eddiewebb-queue/unlock:
+      - eddiewebb/queue/unlock:
           resource-name: my-resource
 
 
@@ -57,16 +57,16 @@ workflows:
 
   first-test:
     jobs:
-      - eddiewebb-queue/enqueue:
+      - eddiewebb/queue/enqueue:
           name: block-orb-test-workflow
           concurrency:
             group: my-group
             limit: 1
-      - eddiewebb-queue/wait-for:
+      - eddiewebb/queue/wait-for:
           name: wait-for-previous-job
           requires:
             - block-orb-test-workflow
-      - eddiewebb-queue/enqueue:
+      - eddiewebb/queue/enqueue:
           name: run-terragrunt
           requires:
             - wait-for-previous-job
