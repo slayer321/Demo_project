@@ -62,8 +62,8 @@ workflows:
       #     time: '1'
       - update-env:
           name: "Running the update env"
-          requires:
-            - queue/block_workflow
+          # requires:
+          #   - queue/block_workflow
 
       # - block-orb-test:
       #     name:  Test for block-orb
