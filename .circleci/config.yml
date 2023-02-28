@@ -57,13 +57,13 @@ workflows:
 
   first-test:
     jobs:
-      # - queue/block_workflow:
-      #     only-on-branch: main
-      #     time: '1'
+      - queue/block_workflow:
+          only-on-branch: main
+          time: '2'
       - update-env:
           name: "Running the update env"
-          # requires:
-          #   - queue/block_workflow
+          requires:
+            - queue/block_workflow
 
       # - block-orb-test:
       #     name:  Test for block-orb
