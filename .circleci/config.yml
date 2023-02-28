@@ -30,26 +30,26 @@ jobs:
           command: | 
             echo "Update Env"
   
-  block-orb-test:
-    executor: base-cimg-executor
-    steps:
-      - checkout
-      - eddiewebb/queue/lock:
-          resource-name: my-resource
-      - run:
-          name: block-orb-test
-          command: | 
-            echo "Update block-orb-test"
-            # start time
-            date +"%H:%M:%S"
+  # block-orb-test:
+  #   executor: base-cimg-executor
+  #   steps:
+  #     - checkout
+  #     - eddiewebb/queue/lock:
+  #         resource-name: my-resource
+  #     - run:
+  #         name: block-orb-test
+  #         command: | 
+  #           echo "Update block-orb-test"
+  #           # start time
+  #           date +"%H:%M:%S"
 
-            # sleep for 5 seconds
-            sleep 120
+  #           # sleep for 5 seconds
+  #           sleep 120
 
-            # end time
-            date +"%H:%M:%S"
-      - eddiewebb/queue/unlock:
-          resource-name: my-resource
+  #           # end time
+  #           date +"%H:%M:%S"
+  #     - eddiewebb/queue/unlock:
+  #         resource-name: my-resource
 
 
 workflows:
