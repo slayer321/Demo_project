@@ -45,8 +45,10 @@ jobs:
     executor: base-cimg-executor
     steps:
       - checkout
-      - block_workflow:
-          requires: "update-env"
+      - queue/until_front_of_line:
+          block-workflow: true
+          time: '5'
+          only-on-branch: 'main'
       - run:
           name: Update Env
           command: | 
