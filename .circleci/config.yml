@@ -37,6 +37,7 @@ jobs:
             sleep 120
 
             # end time
+            date +"%H:%M:%S"
   
   # block-orb-test:
   #   executor: base-cimg-executor
@@ -67,7 +68,7 @@ workflows:
     jobs:
       - queue/block_workflow:
           only-on-branch: main
-          time: '3'
+          time: '1'
       - update-env:
           name: "Running the update env"
           requires:
