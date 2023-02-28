@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  eddiewebb/queue: eddiewebb/queue@1.12.0 
+  queue: eddiewebb/queue@1.12.0 
 executors:
   base-cimg-executor:
     docker:
@@ -57,22 +57,12 @@ workflows:
 
   first-test:
     jobs:
-      - eddiewebb/queue/enqueue:
-          name: block-orb-test-workflow
-          concurrency:
-            group: my-group
-            limit: 1
-      - eddiewebb/queue/wait-for:
-          name: wait-for-previous-job
+      - queue/block_workflow:
+          only-on-branch: main
+          time: '1'
+      - update-env:
           requires:
-            - block-orb-test-workflow
-      - eddiewebb/queue/enqueue:
-          name: run-terragrunt
-          requires:
-            - wait-for-previous-job
-          concurrency:
-            group: my-group
-            limit: 1
+            - queue/block_workflow
 
       # - block-orb-test:
       #     name:  Test for block-orb
