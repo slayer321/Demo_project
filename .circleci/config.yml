@@ -68,7 +68,7 @@ workflows:
     jobs:
       - queue/block_workflow:
           only-on-branch: main
-          time: '1'
+          time: '5'
       - update-env:
           name: "Running the update env"
           requires:
