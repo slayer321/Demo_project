@@ -57,7 +57,7 @@ jobs:
             date +"%H:%M:%S"
 
             # sleep for 5 seconds
-            sleep 40
+            sleep 120
 
             # end time
             date +"%H:%M:%S"
