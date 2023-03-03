@@ -46,29 +46,6 @@ jobs:
     steps:
       - checkout
       - queue/until_front_of_line:
-          block-workflow: true
-          time: '5'
-          only-on-branch: 'main'
-      - run:
-          name: Update Env
-          command: | 
-            echo "Update Env"
-            echo "Update block-orb-test"
-            # start time
-            date +"%H:%M:%S"
-
-            # sleep for 5 seconds
-            sleep 120
-
-            # end time
-            date +"%H:%M:%S"
-
-
-  update-env-2: 
-    executor: base-cimg-executor
-    steps:
-      - checkout
-      - queue/until_front_of_line:
           block-workflow: false
           time: '5'
           only-on-branch: 'main'
@@ -113,8 +90,6 @@ workflows:
 
   first-test:
     jobs:
-      # - update-env-2:
-      #     name: "Running update env 2"
       - update-env:
           name: "Running the update env"
 
