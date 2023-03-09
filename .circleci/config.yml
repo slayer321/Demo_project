@@ -46,7 +46,7 @@ jobs:
     steps:
       - checkout
       - queue/until_front_of_line:
-          block-workflow: false
+          block-workflow: true
           time: '5'
           only-on-branch: 'main'
       - run:
