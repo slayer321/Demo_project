@@ -4,9 +4,15 @@ orbs:
   queue: eddiewebb/queue@1.12.0
   continuation: circleci/continuation@0.3.1 
 executors:
-  base-cimg-executor:
+  docker:
     docker:
       - image: cimg/base:2022.07
+  linux: # a Linux VM running Ubuntu 20.04
+    machine:
+      image: ubuntu-2004:202107-02
+  macos: # macos executor running Xcode
+    macos:
+      xcode: 14.2.0
 
 
 commands:
@@ -30,6 +36,19 @@ commands:
 
 
 jobs:
+  diff-os:
+    parameters:
+      os:
+        type: executor
+    executor: << parameters.os >>
+    steps:
+      - checkout
+      - run: 
+          name: Running the OS command 
+          command: |
+            ls -al 
+            hostname
+
   test-job:
     executor: base-cimg-executor
     steps:
@@ -89,10 +108,16 @@ jobs:
 workflows:
   version: 2
 
-  post-release:
+  diff-os-worflow:
     jobs:
-      - continuation/continue:
-          configuration_path: .circleci/post-release.yaml
+      - diff-os:
+          matrix:
+            parameters:
+              os: [docker, linux, macos]
+  # post-release:
+  #   jobs:
+  #     - continuation/continue:
+  #         configuration_path: .circleci/post-release.yaml
 
 
   # first-test:
