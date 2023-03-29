@@ -1,0 +1,29 @@
+version: 2.1
+
+executors:
+  base-cimg-executor:
+    docker:
+      - image: cimg/base:2022.07
+
+
+jobs:
+  test-job:
+    executor: base-cimg-executor
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Test base image
+          command: |
+            ls -l
+            docker version
+            cat /etc/lsb-release
+
+
+workflows:
+  version: 2
+
+  post-release-file:
+    jobs:
+      test-job:
+        name: Running the test job in post release file 
