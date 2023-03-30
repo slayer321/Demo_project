@@ -11,6 +11,9 @@ executors:
   linux-n: # a Linux VM running Ubuntu 20.04
     machine:
       image: ubuntu-2004:202107-02
+  linux-docker:
+    docker:
+      - image: cimg/base:2022.12-18.04
   linux-a: # a Linux VM running Ubuntu 20.04
     machine:
       image: ubuntu-2004:202101-01
@@ -68,7 +71,7 @@ jobs:
             echo "test"
   
   run_go_env-normal:
-    executor: linux-n
+    executor: linux-docker
     steps:
       - checkout
       - go/install
