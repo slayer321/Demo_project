@@ -8,9 +8,12 @@ executors:
   docker:
     docker:
       - image: cimg/base:2022.07
-  linux: # a Linux VM running Ubuntu 20.04
+  linux-n: # a Linux VM running Ubuntu 20.04
     machine:
       image: ubuntu-2004:202107-02
+  linux-a: # a Linux VM running Ubuntu 20.04
+    machine:
+      image: ubuntu-2004:202101-01
   macos: # macos executor running Xcode
     macos:
       xcode: 14.2.0
@@ -61,15 +64,34 @@ jobs:
             ./go version 
             ./go env
   
-  run_go_env:
-    executor: macos
+  run_go_env-normal:
+    executor: linux-n
     steps:
       - checkout
       - go/install
       - run: 
-          name: Test for ENV 
+          name: Test for go ENV 
           command: |
             go env
+      - run:
+          name: Uname command 
+          command: | 
+            uname -a
+  
+  run_go_env-arm:
+    executor: linux-a
+    resource_class: arm.medium
+    steps:
+      - checkout
+      - go/install
+      - run: 
+          name: Test for go ENV 
+          command: |
+            go env
+      - run:
+          name: Uname command 
+          command: | 
+            uname -a
 
   diff-os:
     parameters:
