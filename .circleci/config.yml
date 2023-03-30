@@ -42,7 +42,6 @@ jobs:
     steps:
       - checkout
       - go/install
-      - go/version
       - run: 
           name: Test for ENV 
           command: |
