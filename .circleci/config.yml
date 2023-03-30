@@ -47,6 +47,7 @@ jobs:
           command: |
             curl -L -o go.tar.gz https://golang.org/dl/go1.17.4.darwin-amd64.tar.gz
             tar -C /usr/local -xzf go.tar.gz
+            ls -al /usr/local/go
             echo 'export PATH=$PATH:/usr/local/go/bin' >> $BASH_ENV
             source $BASH_ENV
       - run:
