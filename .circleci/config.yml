@@ -47,10 +47,11 @@ jobs:
           command: |
             curl -L -o go.tar.gz https://golang.org/dl/go1.17.4.darwin-amd64.tar.gz
             sudo tar -C /usr/local -xzf go.tar.gz
-            ls -al /usr/local/go
+            ls -al /usr/local/go/bin 
             mkdir ~/go
             export GOPATH=~/go
             export PATH=$PATH:/usr/local/go/bin
+            echo $PATH
       - run:
           name: Run Go Command
           command: |
