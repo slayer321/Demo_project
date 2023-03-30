@@ -200,15 +200,21 @@ workflows:
       #     name: "Go env arm"
       - install_and_run_go:
           name: "Macos run"
-
-  diff-os-worflow:
-    jobs:
       - diff-os:
           gcloud: true 
           ciname: "Hey this is diff os CI"
           matrix:
             parameters:
               os: [docker, linux, macos]
+
+  # diff-os-worflow:
+  #   jobs:
+  #     - diff-os:
+  #         gcloud: true 
+  #         ciname: "Hey this is diff os CI"
+  #         matrix:
+  #           parameters:
+  #             os: [docker, linux, macos]
   # post-release:
   #   jobs:
   #     - continuation/continue:
