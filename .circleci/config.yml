@@ -57,6 +57,7 @@ jobs:
           command: |
             cd /usr/local/go/bin
             ls -al
+            file go
             go version 
             go env
   
