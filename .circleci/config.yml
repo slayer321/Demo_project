@@ -167,8 +167,10 @@ workflows:
 
   run-go-env-w:
     jobs:
-      - install_and_run_go:
-          name: Run go env
+      - run_go_env-normal:
+          name: "Go env normal"
+      - run_go_env-arm:
+          name: "Go env arm"
 
   # diff-os-worflow:
   #   jobs:
