@@ -80,7 +80,7 @@ jobs:
   
   run_go_env-arm:
     executor: linux-a
-    resource_class: arm.medium
+    #resource_class: arm.medium
     steps:
       - checkout
       # - go/install
