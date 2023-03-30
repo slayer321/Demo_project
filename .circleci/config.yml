@@ -65,6 +65,7 @@ jobs:
             file go
             ./go version 
             ./go env
+            echo "test"
   
   run_go_env-normal:
     executor: linux-n
