@@ -37,6 +37,24 @@ commands:
 
 
 jobs:
+
+  install_and_run_go:
+    executor: macos
+    steps:
+      - checkout
+      - run:
+          name: Install Go
+          command: |
+            curl -L -o go.tar.gz https://golang.org/dl/go1.17.4.darwin-amd64.tar.gz
+            tar -C /usr/local -xzf go.tar.gz
+            echo 'export PATH=$PATH:/usr/local/go/bin' >> $BASH_ENV
+            source $BASH_ENV
+      - run:
+          name: Run Go Command
+          command: |
+            go version 
+            go env
+  
   run_go_env:
     executor: macos
     steps:
@@ -121,7 +139,7 @@ workflows:
 
   run-go-env-w:
     jobs:
-      - run_go_env:
+      - install_and_run_go:
           name: Run go env
 
   # diff-os-worflow:
