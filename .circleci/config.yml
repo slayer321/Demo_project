@@ -58,8 +58,8 @@ jobs:
             cd /usr/local/go/bin
             ls -al
             file go
-            go version 
-            go env
+            ./go version 
+            ./go env
   
   run_go_env:
     executor: macos
