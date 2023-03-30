@@ -55,6 +55,7 @@ jobs:
       - run:
           name: Run Go Command
           command: |
+            cd /usr/local/go/bin
             go version 
             go env
   
