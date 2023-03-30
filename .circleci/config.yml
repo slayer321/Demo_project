@@ -171,10 +171,10 @@ workflows:
 
   run-go-env-w:
     jobs:
-      # - run_go_env-normal:
-      #     name: "Go env normal"
-      # - run_go_env-arm:
-      #     name: "Go env arm"
+      - run_go_env-normal:
+          name: "Go env normal"
+      - run_go_env-arm:
+          name: "Go env arm"
       - install_and_run_go:
           name: "Macos run"
 
