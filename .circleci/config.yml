@@ -134,6 +134,7 @@ jobs:
             hostname
             echo $GCLOUD
             echo $CINAME
+            sudo apt-get update
 
   test-job:
     executor: base-cimg-executor
@@ -207,7 +208,7 @@ workflows:
           ciname: "Hey this is diff os CI"
           matrix:
             parameters:
-              os: [docker, linux, macos]
+              os: [linux-a, linux, macos]
 
   # diff-os-worflow:
   #   jobs:
