@@ -18,6 +18,7 @@ executors:
   macos: # macos executor running Xcode
     macos:
       xcode: 14.2.0
+    resource_class: macos.m1.large.gen1
 
 
 commands:
@@ -173,6 +174,8 @@ workflows:
           name: "Go env normal"
       - run_go_env-arm:
           name: "Go env arm"
+      - install_and_run_go:
+          name: "Macos run"
 
   # diff-os-worflow:
   #   jobs:
