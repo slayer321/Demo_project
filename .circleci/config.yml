@@ -2,7 +2,8 @@ version: 2.1
 setup: true
 orbs:
   queue: eddiewebb/queue@1.12.0
-  continuation: circleci/continuation@0.3.1 
+  continuation: circleci/continuation@0.3.1
+  go: circleci/go@1.7.3
 executors:
   docker:
     docker:
@@ -36,6 +37,17 @@ commands:
 
 
 jobs:
+  run_go_env:
+    executor: macos
+    steps:
+      - checkout
+      - go/install
+      - go/version
+      - run: 
+          name: Test for ENV 
+          command: |
+            go env
+
   diff-os:
     parameters:
       os:
@@ -108,12 +120,17 @@ jobs:
 workflows:
   version: 2
 
-  diff-os-worflow:
+  run-go-env-w:
     jobs:
-      - diff-os:
-          matrix:
-            parameters:
-              os: [docker, linux, macos]
+      - run_go_env:
+          name: Run go env
+
+  # diff-os-worflow:
+  #   jobs:
+  #     - diff-os:
+  #         matrix:
+  #           parameters:
+  #             os: [docker, linux, macos]
   # post-release:
   #   jobs:
   #     - continuation/continue:
