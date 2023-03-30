@@ -72,6 +72,8 @@ jobs:
             ./go version 
             ./go env
             echo "test"
+            uname -a
+            arch
   
   run_go_env-normal:
     executor: linux-docker
