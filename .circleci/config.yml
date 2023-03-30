@@ -15,8 +15,10 @@ executors:
     docker:
       - image: cimg/base:2022.12-18.04
   linux-a: # a Linux VM running Ubuntu 20.04
-    machine:
-      image: ubuntu-2004:202101-01
+    docker:
+      - image: cimg/base:2022.12-18.04
+    # machine:
+    #   image: ubuntu-2004:202101-01
     resource_class: arm.medium
   macos: # macos executor running Xcode
     macos:
@@ -181,8 +183,8 @@ workflows:
     jobs:
       - run_go_env-normal:
           name: "Go env normal"
-      # - run_go_env-arm:
-      #     name: "Go env arm"
+      - run_go_env-arm:
+          name: "Go env arm"
       # - install_and_run_go:
       #     name: "Macos run"
 
