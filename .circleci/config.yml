@@ -127,7 +127,8 @@ jobs:
       - run: 
           name: Running the OS command 
           command: |
-            ls -al 
+            uname -a
+            arch
             hostname
             echo $GCLOUD
             echo $CINAME
