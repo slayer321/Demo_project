@@ -83,11 +83,11 @@ jobs:
     resource_class: arm.medium
     steps:
       - checkout
-      - go/install
-      - run: 
-          name: Test for go ENV 
-          command: |
-            go env
+      # - go/install
+      # - run: 
+      #     name: Test for go ENV 
+      #     command: |
+      #       go env
       - run:
           name: Uname command 
           command: | 
