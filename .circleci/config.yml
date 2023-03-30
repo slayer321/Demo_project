@@ -8,6 +8,9 @@ executors:
   docker:
     docker:
       - image: cimg/base:2022.07
+  linux: # a Linux VM running Ubuntu 20.04
+    machine:
+      image: ubuntu-2004:202107-02
   linux-n: # a Linux VM running Ubuntu 20.04
     machine:
       image: ubuntu-2004:202107-02
@@ -109,7 +112,16 @@ jobs:
     parameters:
       os:
         type: executor
+      gcloud:
+        type: boolean
+        description: yes or no
+      ciname: 
+        type: string
+        description: name of the ci 
     executor: << parameters.os >>
+    environment:
+      GCLOUD: << parameters.gcloud >>
+      CINAME: << parameters.ciname >>
     steps:
       - checkout
       - run: 
@@ -117,6 +129,8 @@ jobs:
           command: |
             ls -al 
             hostname
+            echo $GCLOUD
+            echo $CINAME
 
   test-job:
     executor: base-cimg-executor
@@ -177,21 +191,23 @@ jobs:
 workflows:
   version: 2
 
-  run-go-env-w:
-    jobs:
-      - run_go_env-normal:
-          name: "Go env normal"
-      - run_go_env-arm:
-          name: "Go env arm"
+  # run-go-env-w:
+  #   jobs:
+  #     - run_go_env-normal:
+  #         name: "Go env normal"
+  #     - run_go_env-arm:
+  #         name: "Go env arm"
       # - install_and_run_go:
       #     name: "Macos run"
 
-  # diff-os-worflow:
-  #   jobs:
-  #     - diff-os:
-  #         matrix:
-  #           parameters:
-  #             os: [docker, linux, macos]
+  diff-os-worflow:
+    jobs:
+      - diff-os:
+          gcloud: true 
+          ciname: "Hey this is diff os CI"
+          matrix:
+            parameters:
+              os: [docker, linux, macos]
   # post-release:
   #   jobs:
   #     - continuation/continue:
