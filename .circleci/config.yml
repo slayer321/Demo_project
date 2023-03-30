@@ -92,6 +92,7 @@ jobs:
           name: Uname command 
           command: | 
             uname -a
+            arch
 
   diff-os:
     parameters:
