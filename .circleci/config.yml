@@ -14,11 +14,9 @@ executors:
   linux-docker:
     docker:
       - image: cimg/base:2022.12-18.04
-  linux-a: # a Linux VM running Ubuntu 20.04
-    docker:
-      - image: cimg/base:2022.12-18.04
-    # machine:
-    #   image: ubuntu-2004:202101-01
+  linux-a: # a Linux VM running Ubuntu 20.044
+    machine:
+      image: ubuntu-2004:202101-01
     resource_class: arm.medium
   macos: # macos executor running Xcode
     macos:
