@@ -69,7 +69,7 @@ jobs:
           command: |
             echo "GOOS==>"$GOOS
             echo "GOARCH==>"$GOARCH
-            env GOOS=${GOOS} GOARCH=arm64 go build main.go
+            env GOOS=${GOOS} GOARCH=${GOARCH} go build main.go
             file main 
 
   install_and_run_go:
