@@ -48,6 +48,28 @@ commands:
 
 
 jobs:
+  multiple_os_run:
+    goarch:
+      type: string
+      description: the GOARCH to use for the build
+      default: amd64
+    goos:
+      type: string
+      description: the GOOS to use for the build
+      default: linux
+    executor: linux-docker
+    environment:
+      PACKAGES_DIR: "/tmp/packages"
+      GOARCH: <<parameters.goarch>>
+      GOOS: <<parameters.goos>>
+    steps:
+      - checkout
+      - go/install
+      - run:
+          echo "GOOS==>"$GOOS
+          echo "GOARCH==>"$GOARCH
+          env GOOS=${GOOS} GOARCH=arm64 go build main.go
+          file main 
 
   install_and_run_go:
     executor: macos
@@ -195,20 +217,35 @@ jobs:
 workflows:
   version: 2
 
-  run-go-env-w:
+  multiple_os_run-w:
     jobs:
-      # - run_go_env-normal:
-      #     name: "Go env normal"
-      # - run_go_env-arm:
-      #     name: "Go env arm"
-      - install_and_run_go:
-          name: "Macos run"
-      - diff-os:
-          gcloud: true 
-          ciname: "Hey this is diff os CI"
-          matrix:
-            parameters:
-              os: [linux-a, linux, macos]
+      - multiple_os_run:
+          name: Linux amd64 
+          goos: linux
+          goarch: amd64
+      - multiple_os_run:
+          name: Linux arm64
+          goos: linux
+          goarch: arm64
+      - multiple_os_run:
+          name: Darwin amd64
+          goos: darwin
+          goarch: amd64
+
+  # run-go-env-w:
+  #   jobs:
+  #     # - run_go_env-normal:
+  #     #     name: "Go env normal"
+  #     # - run_go_env-arm:
+  #     #     name: "Go env arm"
+  #     - install_and_run_go:
+  #         name: "Macos run"
+  #     - diff-os:
+  #         gcloud: true 
+  #         ciname: "Hey this is diff os CI"
+  #         matrix:
+  #           parameters:
+  #             os: [linux-a, linux, macos]
 
   # diff-os-worflow:
   #   jobs:
