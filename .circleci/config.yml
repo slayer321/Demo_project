@@ -49,12 +49,13 @@ commands:
 
 jobs:
   multiple_os_run:
-    goarch:
-      type: string
-      description: the GOARCH to use for the build
-    goos:
-      type: string
-      description: the GOOS to use for the build
+    parameters:
+      goarch:
+        type: string
+        description: the GOARCH to use for the build
+      goos:
+        type: string
+        description: the GOOS to use for the build
     executor: linux-docker
     environment:
       PACKAGES_DIR: "/tmp/packages"
