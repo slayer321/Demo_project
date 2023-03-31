@@ -52,11 +52,9 @@ jobs:
     goarch:
       type: string
       description: the GOARCH to use for the build
-      default: amd64
     goos:
       type: string
       description: the GOOS to use for the build
-      default: linux
     executor: linux-docker
     environment:
       PACKAGES_DIR: "/tmp/packages"
