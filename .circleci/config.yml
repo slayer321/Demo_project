@@ -65,10 +65,12 @@ jobs:
       - checkout
       - go/install
       - run:
-          echo "GOOS==>"$GOOS
-          echo "GOARCH==>"$GOARCH
-          env GOOS=${GOOS} GOARCH=arm64 go build main.go
-          file main 
+          name: Run the Go build command
+          command: |
+            echo "GOOS==>"$GOOS
+            echo "GOARCH==>"$GOARCH
+            env GOOS=${GOOS} GOARCH=arm64 go build main.go
+            file main 
 
   install_and_run_go:
     executor: macos
