@@ -20,7 +20,7 @@ executors:
   linux-a: # a Linux VM running Ubuntu 20.044
     machine:
       image: ubuntu-2004:202101-01
-    resource_class: arm.medium
+    #resource_class: arm.medium
   macos: # macos executor running Xcode
     macos:
       xcode: 14.2.0
