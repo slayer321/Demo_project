@@ -72,6 +72,34 @@ jobs:
             env GOOS=${GOOS} GOARCH=${GOARCH} go build main.go
             file main 
 
+  multiple_os_run_aperture:
+    parameters:
+      goarch:
+        type: string
+        description: the GOARCH to use for the build
+      goos:
+        type: string
+        description: the GOOS to use for the build
+    executor: linux-docker
+    environment:
+      PACKAGES_DIR: "/tmp/packages"
+      GOARCH: <<parameters.goarch>>
+      GOOS: <<parameters.goos>>
+    steps:
+      - checkout
+      - go/install
+      - run:
+          working_directory: aperture/cmd/aperturectl
+          name: Run the Go build command
+          command: |
+            echo "GOOS==>"$GOOS
+            echo "GOARCH==>"$GOARCH
+
+            env GOOS=${GOOS} GOARCH=${GOARCH} go build .
+            file aperturectl
+
+      
+
   install_and_run_go:
     executor: macos
     steps:
@@ -218,9 +246,18 @@ jobs:
 workflows:
   version: 2
 
-  multiple_os_run-w:
+  multiple_os_run-w-aperture:
     jobs:
       - multiple_os_run:
+          name: Linux amd64 
+          matrix:
+            parameters:
+              goarch: ["amd64","arm64"]
+              goos: ["linux","darwin"]
+
+  multiple_os_run-w:
+    jobs:
+      - multiple_os_run_aperture:
           name: Linux amd64 
           matrix:
             parameters:
