@@ -221,8 +221,8 @@ workflows:
           name: Linux amd64 
           matrix:
             parameters:
-              goarch: [amd64,arm64]
-              goos: [linux,darwin]
+              goarch: ["amd64","arm64"]
+              goos: ["linux","darwin"]
       #     goos: linux
       #     goarch: amd64
       # - multiple_os_run:
