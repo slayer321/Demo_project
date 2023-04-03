@@ -220,6 +220,17 @@ jobs:
 
             # end time
             date +"%H:%M:%S"
+  normal-job:
+    executor: docker
+    steps:
+      - checkout
+      - run: 
+          name: Running the normal JOb
+          command: | 
+            if $CI 
+            then
+              echo "Yes the Circleci variable is set"
+            fi
   
   # block-orb-test:
   #   executor: base-cimg-executor
@@ -245,6 +256,11 @@ jobs:
 
 workflows:
   version: 2
+  
+  running-normal-job:
+    jobs:
+      -  normal-job:
+            name: Running normal JOb
 
   # multiple_os_run-w:
   #   jobs:
@@ -255,14 +271,14 @@ workflows:
   #             goarch: ["amd64","arm64"]
   #             goos: ["linux","darwin"]
 
-  multiple_os_run-w-aperture:
-    jobs:
-      - multiple_os_run_aperture:
-          name: Linux amd64 
-          matrix:
-            parameters:
-              goarch: ["amd64","arm64"]
-              goos: ["linux","darwin"]
+  # multiple_os_run-w-aperture:
+  #   jobs:
+  #     - multiple_os_run_aperture:
+  #         name: Linux amd64 
+  #         matrix:
+  #           parameters:
+  #             goarch: ["amd64","arm64"]
+  #             goos: ["linux","darwin"]
   #     #     goos: linux
       #     goarch: amd64
       # - multiple_os_run:
