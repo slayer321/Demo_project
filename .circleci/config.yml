@@ -223,7 +223,7 @@ jobs:
   normal-job:
     executor: docker
     steps:
-      - checkout
+      #- checkout
       - run: 
           name: Running the normal JOb
           command: | 
@@ -231,6 +231,7 @@ jobs:
             then
               echo "Yes the Circleci variable is set"
             fi
+            ls -al
   
   # block-orb-test:
   #   executor: base-cimg-executor
