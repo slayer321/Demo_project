@@ -222,17 +222,23 @@ jobs:
             date +"%H:%M:%S"
   normal-job:
     executor: docker
+    parameters:
+      component:
+        type: string
     steps:
       #- checkout
-      - run: 
-          name: Running the normal JOb
-          command: | 
-            if $CI 
-            then
-              echo "Yes the Circleci variable is set"
-            fi
-            ls -al
-  
+      - when:
+          condition: 
+            not: << parameters.component >>
+          steps:
+            - run: 
+                name: Running the normal JOb
+                command: | 
+                  if $CI 
+                  then
+                    echo "Yes the Circleci variable is set"
+                  fi
+                  ls -al  
   # block-orb-test:
   #   executor: base-cimg-executor
   #   steps:
@@ -260,8 +266,11 @@ workflows:
   
   running-normal-job:
     jobs:
-      -  normal-job:
-            name: Running normal JOb
+      - normal-job:
+          name: Running normal JOb
+          component: "agent-service"
+      - normal-job:
+          name: Don't run this job 
 
   # multiple_os_run-w:
   #   jobs:
