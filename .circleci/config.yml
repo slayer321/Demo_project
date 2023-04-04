@@ -228,17 +228,18 @@ jobs:
         default: ""
     steps:
       #- checkout
-      - when:
-          condition: << len(parameters.component) > 0 >>
-          steps:
-            - run: 
-                name: Running the normal JOb
-                command: | 
-                  if $CI 
-                  then
-                    echo "Yes the Circleci variable is set"
-                  fi
-                  ls -al  
+      - run: 
+          name: Running the normal JOb
+          command: |
+            if [[ ! << parameters.component >> = "" ]]; then
+                echo "Skip the version creation"
+            else
+              if $CI 
+              then
+                echo "Yes the Circleci variable is set"
+              fi
+            fi
+            ls -al  
   # block-orb-test:
   #   executor: base-cimg-executor
   #   steps:
