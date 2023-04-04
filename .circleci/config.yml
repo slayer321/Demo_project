@@ -231,7 +231,7 @@ jobs:
       - run: 
           name: Running the normal JOb
           command: |
-            if [[ ! << parameters.component >> = "" ]]; then
+            if [[ ! << parameters.component >> == "" ]]; then
                 echo "Skip the version creation"
             else
               if $CI 
