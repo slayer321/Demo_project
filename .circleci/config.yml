@@ -228,6 +228,7 @@ jobs:
         default: ""
       extra_build_arg:
         type: string
+        default: ""
     environment:
       EXTRA_BUILD_ARG : << parameters.extra_build_arg >>
     steps:
@@ -286,8 +287,7 @@ workflows:
       - normal-job:
           name: Running normal JOb
           component: "agent-service"
-      - normal-job:
-          name: Don't run this job 
+
 
   # multiple_os_run-w:
   #   jobs:
