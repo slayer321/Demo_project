@@ -1,6 +1,4 @@
-if [ -z "s" ]
-then
-	echo "yes empty"
-else
-	echo "not empty"
-fi
+BUILD_ENV_ARG="${BUILD_ENV_ARG},BRANCH=main,COMMIT=312322fsd"
+
+
+echo $BUILD_ENV_ARG

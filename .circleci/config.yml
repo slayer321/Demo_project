@@ -226,8 +226,16 @@ jobs:
       component:
         type: string
         default: ""
+      extra_build_arg:
+        type: string
+    environment:
+      EXTRA_BUILD_ARG : << parameters.extra_build_arg >>
     steps:
       #- checkout
+      - run:
+          name: Check the build flag
+          command:
+            echo "${EXTRA_BUILD_ARG}"
       - run: 
           name: Running the normal JOb
           command: |
@@ -240,6 +248,14 @@ jobs:
               fi
             fi
             ls -al  
+            branch=main 
+            commit=3dvs4e234
+            EXTRA_BUILD_ARG="$EXTRA_BUILD_ARG,BRANCH=$branch,COMMIT=$commit"
+            declare -p EXTRA_BUILD_ARG >> "${BASH_ENV}"
+      - run:
+          name: After addition
+          command:
+            echo "${EXTRA_BUILD_ARG}"
   # block-orb-test:
   #   executor: base-cimg-executor
   #   steps:
