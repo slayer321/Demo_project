@@ -225,11 +225,11 @@ jobs:
     parameters:
       component:
         type: string
+        default: ""
     steps:
       #- checkout
       - when:
-          condition: 
-            not: << parameters.component >>
+          condition: << len(parameters.component) > 0 >>
           steps:
             - run: 
                 name: Running the normal JOb
