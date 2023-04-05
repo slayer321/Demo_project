@@ -258,18 +258,18 @@ jobs:
           name: After addition
           command:
             echo "${EXTRA_BUILD_ARG}"
-    docker-build-job:
-      executor: docker
-      parameters:
-        extra_build_args:
-          type: string
-          description: "Extra build arg"
-          default: ""
-      environment:
-        EXTRA_BUILD_ARG : << parameters.extra_build_arg >>
-      steps:
-        - checkout
-        - run:
+  docker-build-job:
+    executor: docker
+    parameters:
+      extra_build_args:
+        type: string
+        description: "Extra build arg"
+        default: ""
+    environment:
+      EXTRA_BUILD_ARG : << parameters.extra_build_args >>
+    steps:
+      - checkout
+      - run:
           name: Setting the env 
           command: |
               version=0.32.1
@@ -282,17 +282,18 @@ jobs:
               declare -p version >> "${BASH_ENV}"
               declare -p git_branch >> "${BASH_ENV}"
               declare -p git_commit_hash >> "${BASH_ENV}"
-        - run:
+      - run:
           name: adding all the set value to new env
           command: |
             EXTRA_BUILD_ARG="--build-arg "${EXTRA_BUILD_ARG}" --build-arg VERSION="${version}" --build-arg GIT_BRANCH="${git_branch}" --build-arg GIT_COMMIT_HASH="${git_commit_hash}""
             declare -p EXTRA_BUILD_ARG >> "${BASH_ENV}"
-        - run:
+      - run:
           name: Print main value
           command: |
             echo $EXTRA_BUILD_ARG
-        - docker/build:
-            extra_build_args: \'"${EXTRA_BUILD_ARG}"\'
+      - docker/build:
+          extra_build_args: \'"${EXTRA_BUILD_ARG}"\'
+          image: my-test-build
 
   # block-orb-test:
   #   executor: base-cimg-executor
