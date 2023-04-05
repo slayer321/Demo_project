@@ -4,6 +4,7 @@ orbs:
   queue: eddiewebb/queue@1.12.0
   continuation: circleci/continuation@0.3.1
   go: circleci/go@1.7.3
+  docker: circleci/docker@2.2.0
 executors:
   docker:
     docker:
@@ -257,6 +258,42 @@ jobs:
           name: After addition
           command:
             echo "${EXTRA_BUILD_ARG}"
+    docker-build-job:
+      executor: docker
+      parameters:
+        extra_build_args:
+          type: string
+          description: "Extra build arg"
+          default: ""
+      environment:
+        EXTRA_BUILD_ARG : << parameters.extra_build_arg >>
+      steps:
+        - checkout
+        - run:
+          name: Setting the env 
+          command: |
+              version=0.32.1
+              git_branch=my-test-branch
+              git_commit_hash=fdsgfsdtg343fdsdestf
+            
+              export version
+              export git_branch
+              export git_commit_hash
+              declare -p version >> "${BASH_ENV}"
+              declare -p git_branch >> "${BASH_ENV}"
+              declare -p git_commit_hash >> "${BASH_ENV}"
+        - run:
+          name: adding all the set value to new env
+          command: |
+            EXTRA_BUILD_ARG="--build-arg "${EXTRA_BUILD_ARG}" --build-arg VERSION="${version}" --build-arg GIT_BRANCH="${git_branch}" --build-arg GIT_COMMIT_HASH="${git_commit_hash}""
+            declare -p EXTRA_BUILD_ARG >> "${BASH_ENV}"
+        - run:
+          name: Print main value
+          command: |
+            echo $EXTRA_BUILD_ARG
+        - docker/build:
+            extra_build_args: \'"${EXTRA_BUILD_ARG}"\'
+
   # block-orb-test:
   #   executor: base-cimg-executor
   #   steps:
@@ -282,12 +319,10 @@ jobs:
 workflows:
   version: 2
   
-  running-normal-job:
+  running-docker-build-job:
     jobs:
-      - normal-job:
-          name: Running normal JOb
-          component: "agent-service"
-
+      - docker-build-job:
+          name: Running dockerbuild JOb
 
   # multiple_os_run-w:
   #   jobs:
