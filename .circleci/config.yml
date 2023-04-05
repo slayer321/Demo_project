@@ -292,8 +292,8 @@ jobs:
           command: |
             echo $EXTRA_BUILD_ARG
       - docker/build:
-          extra_build_args: \'"${EXTRA_BUILD_ARG}"\'
-          image: my-test-build
+          extra_build_args: "${EXTRA_BUILD_ARG}"
+          image: my-test-
 
   # block-orb-test:
   #   executor: base-cimg-executor
