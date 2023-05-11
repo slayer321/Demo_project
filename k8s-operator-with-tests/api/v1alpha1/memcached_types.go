@@ -25,10 +25,18 @@ import (
 
 // MemcachedSpec defines the desired state of Memcached
 type MemcachedSpec struct {
-	//+kubebuilder:validation:Minimum=0
+	//+kubebuilder:validation:Optional
 	//+kubebuilder:default=4
 	// Size is the size of the memcached deployment
 	Size int32 `json:"size"`
+
+	Age int `json:"age"`
+	//+kubebuilder:validation:Optional
+	//+kubebuilder:default=10
+	PoolSize int `json:"poolSize"`
+	//+kubebuilder:validation:Optional
+	//+kubebuilder:default="test"
+	TaskName string `json:"taskName"`
 }
 
 // MemcachedStatus defines the observed state of Memcached

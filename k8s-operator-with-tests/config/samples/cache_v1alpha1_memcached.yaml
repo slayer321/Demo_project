@@ -3,4 +3,5 @@ kind: Memcached
 metadata:
   name: memcached-sample
 spec:
+  age: 22
   # TODO(user): Add fields here

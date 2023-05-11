@@ -35,14 +35,21 @@ spec:
           spec:
             description: MemcachedSpec defines the desired state of Memcached
             properties:
+              age:
+                type: integer
+              poolSize:
+                default: 10
+                type: integer
               size:
                 default: 4
                 description: Size is the size of the memcached deployment
                 format: int32
-                minimum: 0
                 type: integer
+              taskName:
+                default: test
+                type: string
             required:
-            - size
+            - age
             type: object
           status:
             description: MemcachedStatus defines the observed state of Memcached
