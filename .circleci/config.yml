@@ -57,11 +57,15 @@ jobs:
       # install dependencies
       - run:
           name: install dependencies
-          command: npm install
-      # run test suite	
+          command: |
+            cd node
+            npm install dotenv
+            npm install express
       - run:
           name: test
-          command: npm run test
+          command: |
+            cd node
+            npm install jest supertest
 
   multiple_os_run:
     parameters:
