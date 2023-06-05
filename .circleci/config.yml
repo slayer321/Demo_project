@@ -49,6 +49,20 @@ commands:
 
 
 jobs:
+  build_and_test_node:
+    docker:
+      - image: cimg/node:16.11.1
+    steps:
+      - checkout
+      # install dependencies
+      - run:
+          name: install dependencies
+          command: npm install
+      # run test suite	
+      - run:
+          name: test
+          command: npm run test
+
   multiple_os_run:
     parameters:
       goarch:
@@ -320,10 +334,14 @@ jobs:
 workflows:
   version: 2
   
-  running-docker-build-job:
+  testing-for-npm-cache:
     jobs:
-      - docker-build-job:
-          name: Running dockerbuild JOb
+      - build_and_test_node:
+          name: running the chace Node Job
+  # running-docker-build-job:
+  #   jobs:
+  #     - docker-build-job:
+  #         name: Running dockerbuild JOb
 
   # multiple_os_run-w:
   #   jobs:
