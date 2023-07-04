@@ -53,9 +53,21 @@ commands:
 
 jobs:
   azure_marketplace:
+    parameters:
+      use-docker-layer-caching:
+        type: boolean
+        description: Setup docker layer caching for optimized build
+        default: true
+      remote-docker-version:
+        type: string
+        description: Specify the remote docker version
+        default: 20.10.18
     executor: python-cimg-executor
     steps:
       - checkout
+      - setup_remote_docker:
+          version: 20.10.18
+          docker_layer_caching: true
       - run:
           name: Install Azure CLI
           command: |
