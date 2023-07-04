@@ -80,9 +80,10 @@ jobs:
               export REGISTRY_NAME="fluxninja.azurecr.io"
               az login --service-principal -u ${APP_ID} --password ${AZURE_PASSWORD} --tenant ${TENANT}
               az acr login -n $REGISTRY_NAME
-              docker pull nginx:1.25
-              docker tag nginx:1.25 fluxninja.azurecr.io/nginx:1.25
-              docker push fluxninja.azurecr.io/nginx:1.25
+              docker pull nginx:1.24
+              docker tag nginx:1.24 fluxninja.azurecr.io/nginx:1.24
+              docker push fluxninja.azurecr.io/nginx:1.24
+              exit
             '
 
 
