@@ -75,7 +75,7 @@ jobs:
             pwd 
             cd ..
             pwd 
-            docker run -it -v /var/run/docker.sock:/var/run/docker.sock -v project:/data --entrypoint "/bin/bash" mcr.microsoft.com/container-package-app:latest
+            curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
             export REGISTRY_NAME="fluxninja.azurecr.io"
             az login --service-principal -u ${APP_ID} --password ${AZURE_PASSWORD} --tenant ${TENANT}
             az acr login -n $REGISTRY_NAME
