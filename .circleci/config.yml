@@ -6,6 +6,9 @@ orbs:
   go: circleci/go@1.7.3
   docker: circleci/docker@2.2.0
 executors:
+  python-cimg-executor:
+    docker:
+      - image: cimg/python:3.11
   docker:
     docker:
       - image: cimg/base:2022.07
@@ -49,6 +52,26 @@ commands:
 
 
 jobs:
+  azure_marketplace:
+    executor: python-cimg-executor
+    steps:
+      - checkout
+      - run:
+          name: Install Azure CLI
+          command: |
+            docker pull mcr.microsoft.com/container-package-app:latest
+            cd ..
+            docker run -it -v /var/run/docker.sock:/var/run/docker.sock -v ./project:/data --entrypoint "/bin/bash" mcr.microsoft.com/container-package-app:latest
+            export REGISTRY_NAME="fluxninja.azurecr.io"
+            az login --service-principal -u ${APP_ID} --password ${AZURE_PASSWORD} --tenant ${TENANT}
+            az acr login -n $REGISTRY_NAME
+            docker pull nginx
+            docker tag nginx fluxninja.azurecr.io/nginx
+            docker push fluxninja.azurecr.io/nginx
+
+
+
+
   build_and_test_node:
     docker:
       - image: cimg/node:16.11.1
@@ -337,11 +360,16 @@ jobs:
 
 workflows:
   version: 2
-  
-  testing-for-npm-cache:
+
+  publish_azure_marketplace:
     jobs:
-      - build_and_test_node:
-          name: running the chace Node Job
+      - azure_marketplace:
+          name: Publish Azure Marketplace
+  
+  # testing-for-npm-cache:
+  #   jobs:
+  #     - build_and_test_node:
+  #         name: running the chace Node Job
   # running-docker-build-job:
   #   jobs:
   #     - docker-build-job:
