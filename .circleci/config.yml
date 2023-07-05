@@ -62,6 +62,7 @@ jobs:
           command: |
             echo "test"
             uname -a
+            sleep 40
             arch
             pwd
 
@@ -397,7 +398,6 @@ workflows:
     jobs:
       - azure_marketplace:
           name: Publish Azure Marketplace
-      
       - test-jobs:
           name: Running the test Job
   
