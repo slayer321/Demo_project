@@ -52,6 +52,21 @@ commands:
 
 
 jobs:
+
+  test-jobs:
+    executor: python-cimg-executor
+    steps:
+      - checkout
+      - run:
+          name: Run Test
+          command: |
+            echo "test"
+            uname -a
+            arch
+            pwd
+
+
+
   azure_marketplace:
     parameters:
       use-docker-layer-caching:
@@ -382,6 +397,9 @@ workflows:
     jobs:
       - azure_marketplace:
           name: Publish Azure Marketplace
+      
+      - test-jobs:
+          name: Running the test Job
   
   # testing-for-npm-cache:
   #   jobs:
